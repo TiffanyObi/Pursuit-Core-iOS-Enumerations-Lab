@@ -5,22 +5,35 @@ import UIKit
 // a. Define an enumeration called iOSDeviceType with member values iPhone, iPad, iWatch. Create a variable called myiPad and assign it to .iPad.
 
 // Your code here
+/*enum IOSDeviceType {
+    case iPhone, iPad, iWatch
+}
+
+let myiPad = IOSDeviceType.iPad
+
 
 // Uncomment the lines below to test your solution
 
 //let myiPad = iOSDeviceType.iPad
-//assert(myiPad == .iPad)
+assert(myiPad == .iPad)*/
 
 // b. Adjust your code above so that iPhone and iPad have associated values of type String which represents the model number.  Create an instance of a .iPhone("8+") and assign it to a variable called myPhone
 
 // Your code here
 
+/* enum IOSDeviceType {
+    case iPhone(String), iPad(String), iWatch
+}
+
+let myPhone = IOSDeviceType.iPhone("8+")
+
 // Uncomment the lines below to test your solution
 
-//switch myPhone {
-//case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
-//default: fatalError("Was expecting an iPhone but got \(myPhone)")
-//}
+switch myPhone {
+case let .iPhone(model): assert(model == "8+", "Was expecting a model type of 8+, but got \(model)")
+default: fatalError("Was expecting an iPhone but got \(myPhone)")
+}
+*/
 
 // Question Two
 
@@ -31,22 +44,43 @@ import UIKit
 //A step .right will increase the x coordinate by 1.
 //A step .left will decrease the x coordinate by 1.
 
+// Your function here
 
 enum Step {
-    case up
-    case down
-    case left
-    case right
+    case up //(y:Int)
+    case down //(y:Int)
+    case left //(x:Int)
+    case right //(x:Int)
+    
+}
+func getPosition(startingAt: (Int,Int) , afterSteps:[Step]) -> (Int,Int){
+    
+    let x = 0
+    let y = 0
+    
+    let steppps = Step.down
+    
+    switch steppps {
+    case .up:
+        y + 1
+    case .down:
+        y - 1
+    case .left:
+        x - 1
+    case .right:
+        x + 1
+    }
+    return (0,0)
 }
 
-// Your function here
 
 // Uncomment the lines below to test your solution
 
-//let startingLocation = (x: 0, y: 0)
-//let steps: [Step] = [.up, .up, .left, .down, .left]
-//let expectedEndPosition = (x: -2, y: 1)
-//let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+let startingLocation = (x: 0, y: 0)
+let steps: [Step] = [ .up, .up, .left, .down, .left]
+let expectedEndPosition = (x: -2, y: 1)
+let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
+print(endPosition)
 //
 //assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
 
