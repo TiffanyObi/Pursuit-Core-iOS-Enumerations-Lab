@@ -45,49 +45,52 @@ default: fatalError("Was expecting an iPhone but got \(myPhone)")
 //A step .left will decrease the x coordinate by 1.
 
 // Your function here
-
+/*
 enum Step {
-    case up //(y:Int)
-    case down //(y:Int)
-    case left //(x:Int)
-    case right //(x:Int)
-    
+    case up (Int)
+    case down (Int)
+    case left (Int)
+    case right (Int)
 }
-func getPosition(startingAt: (Int,Int) , afterSteps:[Step]) -> (Int,Int){
+
+func getPosition(startingAt: (x:Int,y:Int) , afterSteps:[Step]) -> (Int,Int){
     
-    let x = 0
-    let y = 0
+   let x = 0
+   let y = 0
     
-    let steppps = Step.down
+    let steps = Step.down
     
-    switch steppps {
+    switch steps {
     case .up:
-        y + 1
-    case .down:
-        y - 1
+    case .down():
+        (x,y-1)
     case .left:
-        x - 1
+        (x-1,y)
     case .right:
-        x + 1
+        (x+1,y)
     }
     return (0,0)
 }
 
 
+
 // Uncomment the lines below to test your solution
 
 let startingLocation = (x: 0, y: 0)
-let steps: [Step] = [ .up, .up, .left, .down, .left]
+let steps: [Step] = [ .up(0), .up(0), .left(0), .down(0), .left(0)]
 let expectedEndPosition = (x: -2, y: 1)
 let endPosition = getPosition(startingAt: startingLocation, afterSteps: steps)
 print(endPosition)
+
 //
 //assert(endPosition == expectedEndPosition, "Was expecting \(expectedEndPosition) but got \(endPosition)")
+
+
 
 // Question Three
 
 // You are given a Coin enumeration which describes different coin values. Write a function called getTotalValue(from:) that takes in an array of tuples of type (number: Int, coin: Coin), and returns the total value of all coins in cents.
-
+*/
 enum Coin: Int {
     case penny = 1
     case nickle = 5
@@ -97,20 +100,41 @@ enum Coin: Int {
 
 // Your function here
 
+func getTotalValue(from tuples: [(countOfCoins:Int,coin:Coin)]) -> (Int) {
+     var totalMonies: Int = 0
+    for tuple in tuples {
+    
+        switch tuple.coin {
+    case .nickle:
+        totalMonies += tuple.coin.rawValue * tuple.countOfCoins
+        
+    case .dime:
+        totalMonies += tuple.coin.rawValue * tuple.countOfCoins
+            
+    case .quarter:
+        totalMonies += tuple.countOfCoins * tuple.coin.rawValue
+            
+    case .penny:
+        totalMonies += tuple.coin.rawValue * tuple.countOfCoins
+        }
+        
+    }
+    return totalMonies
+}
 // Uncomment the lines below to test your solution
 
-//let coinArr: [(Int, Coin)] = [
-//    (10, .penny),
-//    (15, .nickle),
-//    (3, .quarter),
-//    (20, .penny),
-//    (3, .dime),
-//    (7, .quarter)
-//]
+let coinArr: [(Int, Coin)] = [
+    (10, .penny),
+    (15, .nickle),
+    (3, .quarter),
+    (20, .penny),
+    (3, .dime),
+    (7, .quarter)
+]
 //
-//let expectedTotal = 385
-//let total = getTotalValue(from: coinArr)
-//assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
+let expectedTotal = 385
+let total = getTotalValue(from: coinArr)
+assert(total == expectedTotal, "Was expecting \(expectedTotal), but got \(total)")
 
 // Question Four
 
